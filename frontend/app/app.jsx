@@ -91,7 +91,7 @@ var App = React.createClass({
                 }
 
                 let credits = this.state.credits;
-                credits.userName = profile.name;
+                credits.username = profile.name;
 
                 this.setState({
                     profile: profile,

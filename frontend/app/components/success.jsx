@@ -3,6 +3,14 @@ import $ from 'jquery';
 
 const Success = React.createClass({
 
+    getInitialState() {
+        return {
+            data: {
+                docker: 'We are currently getting your docker url...'
+            }
+        }
+    },
+
     render() {
         return (
             <div className="grid">
@@ -13,7 +21,8 @@ const Success = React.createClass({
                             Success
                         </h1>
 
-                        <p>We are currently getting your docker url...</p>
+                        <p> {this.state.data.docker} </p>
+
 
 
 
@@ -28,9 +37,9 @@ const Success = React.createClass({
             url: 'https://emmatc.localtunnel.me/users/',
             dataType: 'json',
             method: 'PUT',
-            data: this.props.credits,
+            contentType: "application/json",
+            data: JSON.stringify(this.props.credits),
             success: function(data) {
-                console.log('success data', data);
                 this.setState({data: data});
             }.bind(this),
             error: function(xhr, status, err) {
