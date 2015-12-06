@@ -5,19 +5,6 @@ const Parse = require('parse/node');
 const _ = require('lodash');
 Parse.initialize(config.parse.appId, config.parse.key, config.parse.master);
 
-class Profile extends Parse.Object {
-    /**
-     * this.githubName = githubName;
-     * this.slackName = slackName;
-     * this.awsAccessKeyId = awsAccessKeyId;
-     * this.awsSecretAccessKey = awsSecretAccessKey;
-     */
-    constructor() {
-        super('Profile');
-    }
-}
-Parse.Object.registerSubclass('Profile', Profile);
-
 /**
  *
  * @param {string} username
@@ -51,6 +38,26 @@ function getUserObject(username) {
     return deferred.promise;
 }
 
+function fetchBySlackToken(slackToken) {
+    let deferred = q.defer();
+    let query = new Parse.Query(Parse.User);
+    query.equalTo('slackToken', slackToken);
+    query.first({
+        success: function(object) {
+            if (object) {
+                deferred.reject(new Error("'slackToken' already exists"));
+            } else {
+                deferred.resolve({});
+            }
+        },
+        error: function() {
+            deferred.reject();
+        }
+    });
+
+    return deferred.promise;
+}
+
 /**
  *
  * @param {string} githubName
@@ -78,8 +85,13 @@ function save(githubName, data) {
         });
     }
 
-    q.fcall(getUserObject, githubName)
+    //q.fcall(getUserObject, githubName)
+    q.fcall(fetchBySlackToken, data['slackToken'])
+        .then(getUserObject.bind(null, githubName))
         .then(handle)
+        .fail(function(err){
+            deferred.reject(err);
+        })
         .done();
 
     return deferred.promise;

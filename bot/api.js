@@ -1,5 +1,6 @@
 'use strict';
 const data = require('./data.js');
+const config = require('./config.js');
 const bodyParser = require('body-parser');
 const express = require('express');
 const events = require('events');
@@ -68,7 +69,12 @@ function save(req, res) {
             res.send({
                 status: "created",
                 id: user.id,
-                docker: util.format('http://emma.lukin.be/docker/webhook/%s', user.id)
+                docker: util.format(config.webhook, user.id)
+            });
+        })
+        .fail(function(err){
+            res.send({
+                status: "not unique 'slackToken'"
             });
         });
 }
