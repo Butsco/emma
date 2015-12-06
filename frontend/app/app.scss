@@ -1,0 +1,77 @@
+$ko-font-path: '../node_modules/knockui/dist/sass/fonts/';
+@import '../node_modules/knockui/dist/sass/knockui.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.grid {
+  @extend %ko-grid;
+}
+
+.grid__item {
+  @extend %ko-grid__cell--12;
+  //border: 5px hotpink solid;
+  height: calc(100vh - 10px);
+  padding: 20px;
+}
+
+.primary {
+  @extend %ko-font--primary;
+}
+
+.title {
+  padding-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  @extend %ko-text--align-center;
+}
+
+.logo__item {
+  @extend %ko-grid__cell--2;
+
+  padding: 30px;
+  position: relative;
+  text-align: center;
+
+  &:first-child {
+    @extend %ko-grid__cell--offset-4;
+
+    &:after {
+      @extend %ko-font--primary;
+      content: '+';
+      font-size: 65px;
+      position: absolute;
+      right: -10%;
+
+    }
+  }
+
+}
+
+.centerContent {
+  @extend %ko-text--align-center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.credits {
+  @extend %ko-grid;
+  padding: 20px 0px;
+}
+
+.credits__input {
+  @extend %ko-grid__cell--4;
+  display: block;
+
+  &:first-child {
+    @extend %ko-grid__cell--offset-2;
+  }
+}
+
+.ko-button--primary {
+  margin: 5px;
+}
