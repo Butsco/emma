@@ -4,6 +4,7 @@
  * https://github.com/slackhq/node-slack-client/
  */
 'use strict';
+const config = require('./config.js');
 const data = require('./data.js');
 const Slack = require('slack-client');
 const util = require('util');
@@ -50,7 +51,7 @@ function initClient(client) {
         }
 
         if (fuzzy) {
-            lib.send(client, 'What???');
+            lib.send(client, 'What??? ' + config.isHeroku);
         }
     });
 }
