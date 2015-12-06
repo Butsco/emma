@@ -2,6 +2,11 @@
 //process.env.PORT
 
 var config = {
+    aws: {
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET_KEY,
+        region: process.env.AWS_REGION
+    },
     parse: {
         appId: 'nHPuaicHGtmZYH19UlbdNVkVdUnHBqjLekJkSBfW',
         key: '9FfeJyUY5QkKguBpomSMILVHt1vd9kdETb8J2Uka',
