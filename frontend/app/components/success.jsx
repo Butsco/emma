@@ -18,14 +18,10 @@ const Success = React.createClass({
                     <div className="centerContent">
 
                         <h1 className="primary title">
-                            Success
+                            Docker Link Generator
                         </h1>
 
                         <p> {this.state.data.docker} </p>
-
-
-
-
                     </div>
                 </div>
             </div>
