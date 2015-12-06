@@ -30,7 +30,7 @@ const Success = React.createClass({
 
     componentDidMount() {
         $.ajax({
-            url: 'https://emmatc.localtunnel.me/users/',
+            url: 'https://emmatc.herokuapp.com/users/',
             dataType: 'json',
             method: 'PUT',
             contentType: "application/json",
