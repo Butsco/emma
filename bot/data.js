@@ -85,12 +85,14 @@ function save(githubName, data) {
         });
     }
 
+    // TEMP HARDCODE FOR THE DEMO
     //q.fcall(getUserObject, githubName)
     //q.fcall(fetchBySlackToken, data['slackToken'])
     //    .then(getUserObject.bind(null, githubName))
-    q.fcall(getUserObject, githubName)
+    //q.fcall(getUserObject, githubName)
+    q.fcall(getUserObject, 'lukin0110')
         //.then(handle)
-        .then(function(user){deferred.resolve(user)}) // temp disable for the demo
+        .then(function(user){deferred.resolve(user);})
         .fail(function(err){
             deferred.reject(err);
         })
