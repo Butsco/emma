@@ -1,5 +1,6 @@
 'use strict';
 const data = require('./data.js');
+const emma = require('./emma.js');
 const config = require('./config.js');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -66,6 +67,8 @@ function save(req, res) {
 
     data.save(username, body)
         .then(function(user) {
+            emma.onWelcome(user.id);
+
             res.send({
                 status: "created",
                 id: user.id,

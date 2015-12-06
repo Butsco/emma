@@ -3,8 +3,8 @@ const docker = require('./docker.js');
 const request = require('request');
 
 var options = {
-    url: 'http://localhost:5001/d/h8xiF9Yapp',
-    //url: 'https://emmatc.herokuapp.com/d/h8xiF9Yapp',
+    //url: 'http://localhost:5001/d/h8xiF9Yapp',
+    url: 'https://emmatc.herokuapp.com/d/h8xiF9Yapp',
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(docker.example)
 };

@@ -84,7 +84,7 @@ function initClient(client) {
         if (_.includes(thanks, text)) {
             fuzzy = false;
             state = null;
-            lib.send(client, 'You\re welcome');
+            lib.send(client, 'You\'re welcome');
         }
 
         if (fuzzy) {
@@ -109,7 +109,6 @@ function setup() {
     });
 }
 
-
 function onDocker(data) {
     let id = data['id'];
     let body = data['body'];
@@ -126,7 +125,16 @@ function onDocker(data) {
         });
 }
 
+function onWelcome(id) {
+    let client = clients[id];
+
+    if (client) {
+        lib.send(client, 'Hello, i\'m here to deploy your containers!');
+    }
+}
+
 module.exports = {
     setup: setup,
-    onDocker: onDocker
+    onDocker: onDocker,
+    onWelcome: onWelcome
 };
