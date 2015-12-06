@@ -2,6 +2,7 @@
  * Add a bot at https://my.slack.com/services/new/bot and copy the token here.
  *
  * https://github.com/slackhq/node-slack-client/
+ * xoxb-16003922068-RVCg2fm5zfjVcpAdpB0mWWnT
  */
 'use strict';
 const config = require('./config.js');
@@ -17,6 +18,7 @@ const autoReconnect = true;
 const autoMark = true;
 
 var clients = {};
+var state;
 
 function initClient(client) {
     client.on('open', function() {
@@ -42,16 +44,51 @@ function initClient(client) {
         //console.log(util.inspect(user));
 
         let confirm = ['yes', 'yess', 'yez', 'yezz', 'sure'];
+        let clouds = ['amazon', 'aws'];
+        let thanks = ['thank you', 'thanks'];
         let text = _.trim(message.text.toLowerCase());
         //_.includes([1, 2, 3], 1);
 
         if (_.includes(confirm, text)) {
             fuzzy = false;
-            lib.send(client, 'Owkay where? Amazon, Google?');
+            lib.send(client, 'Owkay where? Amazon, Google, Azure?');
+        }
+
+        if ('no' === text) {
+            fuzzy = false;
+            state = null;
+            lib.send(client, 'Ok, no problem');
+        }
+
+        if (_.includes(clouds, text)) {
+            fuzzy = false;
+            console.log(JSON.stringify(state.body));
+            lib.send(client, 'I\'m deploying \'' + state.body.repository.name + '\' on ' + text + ', hang in there ...');
+            try {
+                let aws = require('./aws.js');
+                aws.handler(aws.body);
+            }catch(e){}
+            //setInterval(function(){
+            //  if (aws.checkState(state.body.repository.name).deployed){
+            //    lib.send(client, 'Deployed... check out ' + aws.checkState(state.body.repository.name));
+            //  } else {
+            //      lib.send(client, 'Hang tight ...');
+            //  }
+            //}, 1000);
+            setTimeout(function(){
+                lib.send(client, 'Deployed... check out https://triviewstaging.triled.be');
+                state = null;
+            }, 10000);
+        }
+
+        if (_.includes(thanks, text)) {
+            fuzzy = false;
+            state = null;
+            lib.send(client, 'You\re welcome');
         }
 
         if (fuzzy) {
-            lib.send(client, 'What???');
+            lib.send(client, 'What do you mean?');
         }
     });
 }
@@ -84,6 +121,7 @@ function onDocker(data) {
 
     lib.send(client, msg)
         .then(function(){
+            state = data;
             lib.send(client, 'Do you want me to deploy it?');
         });
 }

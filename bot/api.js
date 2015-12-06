@@ -79,9 +79,14 @@ function save(req, res) {
         });
 }
 
+function configDebug(req, res) {
+    res.send(config);
+}
+
 app.get('/', index);
 app.post('/d/:id', webhook);
 app.put('/users/', save);
+app.get('/config', configDebug);
 
 
 //

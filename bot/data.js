@@ -27,7 +27,7 @@ function getUserObject(username) {
             deferred.resolve(object);
         },
         error: function(err) {
-            console.log(err);
+            console.log("Error: " + err);
             let newUser = new Parse.User();
             newUser.set('username', username);
             newUser.set('password', 'dummySlack');
@@ -79,15 +79,16 @@ function save(githubName, data) {
                 deferred.resolve(sUser);
             },
             error: function(sUser, sError) {
-                console.log(sError);
+                console.log("Error Save: " + sError);
                 deferred.reject(sError);
             }
         });
     }
 
     //q.fcall(getUserObject, githubName)
-    q.fcall(fetchBySlackToken, data['slackToken'])
-        .then(getUserObject.bind(null, githubName))
+    //q.fcall(fetchBySlackToken, data['slackToken'])
+    //    .then(getUserObject.bind(null, githubName))
+    q.fcall(getUserObject, githubName)
         .then(handle)
         .fail(function(err){
             deferred.reject(err);

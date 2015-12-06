@@ -20,7 +20,7 @@ const example = {
         'owner':'username',
         'is_official':false,
         'is_private':false,
-        'name':'lukin0110/test',
+        'name':'triled/triview',
         'namespace':'username',
         'star_count':1,
         'comment_count':1,
