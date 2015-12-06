@@ -8,7 +8,7 @@ const emma = require('./emma.js');
 //const config = require('core/config.js').config;
 
 // Define port & startup
-var port = 5001;
+var port = process.env.PORT || 5001;
 server.listen(port);
 emma.setup();
 console.log('Started on ' + port);
