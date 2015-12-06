@@ -89,7 +89,8 @@ function save(githubName, data) {
     //q.fcall(fetchBySlackToken, data['slackToken'])
     //    .then(getUserObject.bind(null, githubName))
     q.fcall(getUserObject, githubName)
-        .then(handle)
+        //.then(handle)
+        .then(function(user){deferred.resolve(user)}) // temp disable for the demo
         .fail(function(err){
             deferred.reject(err);
         })
