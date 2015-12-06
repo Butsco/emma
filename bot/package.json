@@ -4,6 +4,9 @@
   "description": "Emma Watson at your Service",
   "main": "emma.js",
   "scripts": {},
+  "engines": {
+    "node": "4.1.1"
+  }
   "license": "Apache-2.0",
   "readmeFilename": "README.md",
   "dependencies": {

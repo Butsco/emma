@@ -30,9 +30,17 @@ function getUserObject(username) {
     query.equalTo('username', username);
     query.first({
         success: function(object) {
+            console.log("Fetched: " + username + ", " + object);
+            if (!object) {
+                object = new Parse.User();
+                object.set('username', username);
+                object.set('password', 'dummySlack');
+            }
+
             deferred.resolve(object);
         },
-        error: function() {
+        error: function(err) {
+            console.log(err);
             let newUser = new Parse.User();
             newUser.set('username', username);
             newUser.set('password', 'dummySlack');

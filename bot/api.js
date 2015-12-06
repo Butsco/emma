@@ -58,6 +58,7 @@ function webhook(req, res) {
  * @param res
  */
 function save(req, res) {
+    console.log(JSON.stringify(req.body));
     let body = _.cloneDeep(req.body);
     let username = body['username'];
     delete body['username'];
