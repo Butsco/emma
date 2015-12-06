@@ -51,7 +51,7 @@ function initClient(client) {
         }
 
         if (fuzzy) {
-            lib.send(client, 'What??? ' + config.isHeroku);
+            lib.send(client, 'What???');
         }
     });
 }
