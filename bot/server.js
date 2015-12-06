@@ -13,14 +13,14 @@ var port = process.env.PORT || 5001;
 server.listen(port);
 console.log('Started on ' + port);
 
-if (!config.isHeroku) {
+//if (!config.isHeroku) {
     emma.setup();
 
     express_app.on('docker_callback', function (data) {
         console.log('Received a callback: ' + JSON.stringify(data));
         emma.onDocker(data);
     });
-}
+//}
 
 //lt --port 8000 --
 //lt --port 5001 --subdomain=emmatc
